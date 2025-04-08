@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import ItemTitle from "./ItemTitle";
 import ItemImage from "./ItemImage";
+import ItemMemo from "./ItemMemo";
 
 const fetchTodo = async (itemId: number) => {
   const tenantId = "bhwoo";
@@ -24,6 +25,7 @@ function ItemPage({ itemId }: { itemId: number }) {
     queryFn: () => fetchTodo(itemId),
   });
   const [uploadImage, setUploadImage] = useState<string | null>(null);
+  const [newMemo, setNewMemo] = useState(data.memo);
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
@@ -32,7 +34,10 @@ function ItemPage({ itemId }: { itemId: number }) {
   return (
     <div>
       <ItemTitle item={data} />
-      <ItemImage item={data} imageSrc={uploadImage} onImageChange={setUploadImage} />
+      <div className="flex flex-col lg:flex-row gap-1 lg:gap-14">
+        <ItemImage item={data} imageSrc={uploadImage} onImageChange={setUploadImage} />
+        <ItemMemo item={data} newMemo={newMemo} onMemoUpdate={setNewMemo}/>
+      </div>
     </div>
   );
 }
