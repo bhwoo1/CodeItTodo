@@ -9,8 +9,6 @@ function ItemTitle({ item }: { item: Item }) {
   const [imageSrc, setImageSrc] = useState("/ic/Property 1=Default.png");
   const queryClient = useQueryClient();
 
-  console.log(item.isCompleted)
-
   useEffect(() => {
     if (item.isCompleted) {
       setImageSrc("/ic/Property 1=Frame 2610233.png");
@@ -46,7 +44,7 @@ function ItemTitle({ item }: { item: Item }) {
     <div
       className={`${
         item.isCompleted ? "bg-violet-100" : "bg-slate-100"
-      } w-5/6 mx-8 lg:mx-0 lg:w-11/12 h-[50px] border-2 rounded-xl flex items-center px-24 gap-12 text-center justify-center`}
+      } mx-4 lg:mx-0 w-11/12 h-[50px] border-2 rounded-xl flex items-center px-24 gap-12 text-center justify-center`}
     >
       <button
         className="cursor-pointer hover:scale-110 transition duration-100"

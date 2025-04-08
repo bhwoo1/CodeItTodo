@@ -1,8 +1,9 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import ItemTitle from "./ItemTitle";
+import ItemImage from "./ItemImage";
 
 const fetchTodo = async (itemId: number) => {
   const tenantId = "bhwoo";
@@ -22,14 +23,16 @@ function ItemPage({ itemId }: { itemId: number }) {
     queryKey: ["todo"],
     queryFn: () => fetchTodo(itemId),
   });
+  const [uploadImage, setUploadImage] = useState<string | null>(null);
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
+
   return (
     <div>
       <ItemTitle item={data} />
-      {data.memo}
+      <ItemImage item={data} imageSrc={uploadImage} onImageChange={setUploadImage} />
     </div>
   );
 }
