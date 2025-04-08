@@ -42,17 +42,17 @@ function TodoList() {
         <Image src={"/img/todo.png"} alt="todo" width={100} height={100} />
         <div>
           {incompletedItems.length === 0 ? (
-            <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-2">
+            <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-4">
               <div className="p-12 md:p-24">
                 <Image
                   src={"/img/todo_large.png"}
-                  alt="incompleted"
+                  alt="completed"
                   width={200}
                   height={200}
                 />
+                <p>할 일이 없어요.</p>
+                <p>TODO를 새롭게 추가해주세요!</p>
               </div>
-              <p>할 일이 없어요.</p>
-              <p>TODO를 새롭게 추가해주세요!</p>
             </div>
           ) : (
             <div className="flex flex-col gap-4 mt-8">
