@@ -27,7 +27,7 @@ function ItemPage({ itemId }: { itemId: number }) {
     queryFn: () => fetchTodo(itemId),
   });
   const [uploadImage, setUploadImage] = useState<string | null>(null);
-  const [newMemo, setNewMemo] = useState<string | null>(data?.memo);
+  const [newMemo, setNewMemo] = useState<string | null>(null);
   const router = useRouter();
   const queryClient = useQueryClient();
 
