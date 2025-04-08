@@ -32,19 +32,16 @@ function TodoList() {
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
-  console.log(data);
   const completedItems = data.filter((item: Item) => item.isCompleted);
   const incompletedItems = data.filter((item: Item) => !item.isCompleted);
-  console.log(completedItems);
-  console.log(incompletedItems);
 
   return (
-    <div className="lg:mx-96 mx-12 flex flex-col lg:flex-row lg:gap-24">
+    <div className="lg:mx-96 mx-12 flex flex-col gap-12 lg:flex-row lg:gap-24">
       <div className="flex flex-col min-w-1/2">
         <Image src={"/img/todo.png"} alt="todo" width={100} height={100} />
         <div>
           {incompletedItems.length === 0 ? (
-            <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-4">
+            <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-2">
               <div className="p-12 md:p-24">
                 <Image
                   src={"/img/todo_large.png"}
