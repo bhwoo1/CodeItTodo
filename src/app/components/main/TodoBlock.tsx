@@ -1,11 +1,15 @@
+"use client"
+
 import { Item } from "@/app/Type";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function TodoBlock({ item }: { item: Item }) {
   const [imageSrc, setImageSrc] = useState("/ic/Property 1=Default.png");
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   useEffect(() => {
     if (item.isCompleted) {
@@ -15,37 +19,46 @@ function TodoBlock({ item }: { item: Item }) {
     }
   }, [item.isCompleted]);
 
-  const handleComplete = async () => {
-    const tenantId = 'bhwoo';
+  const handleRedirect = () => {
+    router.push(`/items/${item.id}`);
+  }
+
+  const handleComplete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const tenantId = "bhwoo";
 
     const res = await fetch(
-        `https://assignment-todolist-api.vercel.app/api/${tenantId}/items/${item.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            isCompleted: !item.isCompleted, 
-          }),
-        }
-      );
-    
-      if (res.ok) {
-        queryClient.invalidateQueries({ queryKey: ["todos"] });
+      `https://assignment-todolist-api.vercel.app/api/${tenantId}/items/${item.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isCompleted: !item.isCompleted,
+        }),
       }
+    );
+
+    if (res.ok) {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    }
   };
 
   return (
     <div
+      onClick={handleRedirect}
       className={`flex flex-row ${
         item.isCompleted ? "bg-violet-100" : "bg-slate-100"
-      } border-2 rounded-full h-[50px] items-center p-4 gap-12`}
+      } border-2 rounded-full h-[50px] items-center p-4 gap-12 cursor-pointer`}
     >
-      <button className="cursor-pointer" onClick={handleComplete}>
+      <button
+        className="cursor-pointer hover:scale-110 transition duration-100"
+        onClick={handleComplete}
+      >
         <Image src={imageSrc} alt="completeIc" width={30} height={30} />
       </button>
-      {item.name}
+      <p className={`${item.isCompleted && "line-through"}`}>{item.name}</p>
     </div>
   );
 }
