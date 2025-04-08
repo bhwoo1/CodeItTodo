@@ -35,6 +35,7 @@ function TodoList() {
   const completedItems = data.filter((item: Item) => item.isCompleted);
   const incompletedItems = data.filter((item: Item) => !item.isCompleted);
 
+
   return (
     <div className="lg:mx-96 mx-12 flex flex-col gap-12 lg:flex-row lg:gap-24">
       <div className="flex flex-col min-w-1/2">
