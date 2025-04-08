@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 header {
   background: #F1F5F9
@@ -6,6 +7,7 @@ header {
 
 body {
   background: #E2E8F0;
+  font-family: 'NanumSquare', sans-serif;
 }
 
 /* :root {
