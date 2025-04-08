@@ -58,7 +58,7 @@ function ItemPage({ itemId }: { itemId: number }) {
 
     if (res.ok) {
       queryClient.invalidateQueries({ queryKey: ["todo"] });
-      setNewMemo(null);
+      setNewMemo("");
       router.push("/");
     }
   };
