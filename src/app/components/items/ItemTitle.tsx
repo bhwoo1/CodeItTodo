@@ -54,7 +54,7 @@ function ItemTitle({ item }: { item: Item }) {
       >
         <Image src={imageSrc} alt="completeIc" width={30} height={30} />
       </button>
-      <p>{item.name}</p>
+      <p className="underline">{item.name}</p>
     </div>
   );
 }
