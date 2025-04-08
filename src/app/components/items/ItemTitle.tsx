@@ -36,7 +36,7 @@ function ItemTitle({ item }: { item: Item }) {
     );
 
     if (res.ok) {
-      queryClient.invalidateQueries({ queryKey: ["todo"] });
+      queryClient.invalidateQueries({ queryKey: ["todo", item.id] });
     }
   };
 
