@@ -23,7 +23,7 @@ const fetchTodo = async (itemId: number) => {
 
 function ItemPage({ itemId }: { itemId: number }) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["todo"],
+    queryKey: ["todo", itemId],
     queryFn: () => fetchTodo(itemId),
   });
   const [uploadImage, setUploadImage] = useState<string | null>(null);
