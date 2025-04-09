@@ -3,16 +3,52 @@
 import { Item } from "@/app/Type";
 import Image from "next/image";
 import React from "react";
+import Swal from "sweetalert2";
 
-function ItemImage({ item, imageSrc, onImageChange }: { item: Item, imageSrc: string|null, onImageChange: (image: string) => void }) {
-
+function ItemImage({
+  item,
+  imageSrc,
+  onImageChange,
+}: {
+  item: Item;
+  imageSrc: string | null;
+  onImageChange: (image: string) => void;
+}) {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
-    if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        onImageChange(imageUrl); // 업로드한 이미지 URL로 변경
+    if (!file) return;
+
+    // 파일 이름 영어만 허용
+    const fileName = file.name;
+    const englishNameRegex = /^[A-Za-z0-9_.-]+$/;
+    if (!englishNameRegex.test(fileName)) {
+      Swal.fire({
+        title: "Error!",
+        text: '파일 이름은 영어, 숫자, "-", "_", "."만 사용할 수 있습니다.',
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
     }
+
+    // 이미지 사이즈 제한
+    const maxSize = 5 * 1024 * 1024;
+    const fileSize = file.size;
+    if (fileSize > maxSize) {
+      Swal.fire({
+        title: "Error!",
+        text: "5MB 이하의 이미지를 업로드해주세요!",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      return;
+    }
+
+    const imageUrl = URL.createObjectURL(file);
+    onImageChange(imageUrl); // 업로드한 이미지 URL로 변경
   }; // 이미지 업로드
 
   return (
@@ -53,7 +89,13 @@ function ItemImage({ item, imageSrc, onImageChange }: { item: Item, imageSrc: st
           </>
         )}
       </div>
-      <input type="file" accept="image/*" id="image" className="hidden" onChange={handleImageUpload}/>
+      <input
+        type="file"
+        accept="image/*"
+        id="image"
+        className="hidden"
+        onChange={handleImageUpload}
+      />
     </div>
   );
 }
