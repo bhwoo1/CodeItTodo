@@ -1,9 +1,10 @@
 "use client";
 
+import { Item } from "@/app/Type";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { FormEvent, useState } from "react";
 
-function AddBar() {
+function AddBar({ todos }:{todos:Item[]}) {
   const [todo, setTodo] = useState("");
   const queryClient = useQueryClient();
 
@@ -25,6 +26,7 @@ function AddBar() {
       }
     );
 
+
     if (res.ok) {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       setTodo("");
@@ -40,9 +42,9 @@ function AddBar() {
         onChange={(e) => setTodo(e.target.value)}
       />
       <button className="w-1/6 md:w-1/4 h-12 cursor-pointer" onClick={handleTodoAdd}>
-        <div className="shadow-[4px_4px_#0F172A] rounded-full border-2 w-full bg-slate-200 h-12 flex text-center items-center justify-center">
-          <span className="block sm:hidden text-2xl font-bold">+</span>
-          <span className="hidden sm:block">+ 추가하기</span>
+        <div className={`shadow-[4px_4px_#0F172A] rounded-full border-2 w-full ${todos?.length === 0 ? 'bg-violet-600' : 'bg-slate-200'}  h-12 flex text-center items-center justify-center`}>
+          <span className={`block sm:hidden text-2xl font-bold ${todos?.length === 0 ? 'text-white' : 'text-black'}`}>+</span>
+          <span className={`hidden sm:block ${todos?.length === 0 ? 'text-white' : 'text-black'}`}>+ 추가하기</span>
         </div>
       </button>
     </form>
