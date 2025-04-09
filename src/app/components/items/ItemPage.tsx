@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemTitle from "./ItemTitle";
 import ItemImage from "./ItemImage";
 import ItemMemo from "./ItemMemo";
@@ -22,6 +22,9 @@ const fetchTodo = async (itemId: number) => {
   return data;
 }; // api 요청
 
+
+
+
 function ItemPage({ itemId }: { itemId: number }) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["todo", itemId],
@@ -33,8 +36,18 @@ function ItemPage({ itemId }: { itemId: number }) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  // data가 없을 시 메인으로 이동
+  useEffect(() => {
+    if (!data) {
+      router.push("/");
+    }
+  }, [data, router]);
+
+
+
   if (isLoading) return <Loading />;
   if (isError) return <div>에러 발생</div>;
+  if(!data) return null;
 
   const handleItemUpdate = async () => {
     const body: { name?: string | null; memo?: string | null; imageUrl?: string } = {};
