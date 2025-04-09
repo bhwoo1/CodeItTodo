@@ -25,7 +25,7 @@ function ItemImage({
     if (!englishNameRegex.test(fileName)) {
       Swal.fire({
         title: "Warning!",
-        text: '파일 이름은 영어, 숫자, "-", "_", "."만 사용할 수 있습니다.',
+        text: '파일 이름은 영어, 숫자만 사용할 수 있습니다.',
         icon: "warning",
         showConfirmButton: false,
         timer: 1500,
