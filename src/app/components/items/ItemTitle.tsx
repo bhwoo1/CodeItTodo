@@ -5,7 +5,15 @@ import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-function ItemTitle({ item }: { item: Item }) {
+function ItemTitle({
+  item,
+  title,
+  onTitleChange,
+}: {
+  item: Item;
+  title: string | null;
+  onTitleChange: (title: string | null) => void;
+}) {
   const [imageSrc, setImageSrc] = useState("/ic/Property 1=Default.png");
   const queryClient = useQueryClient();
 
@@ -52,7 +60,11 @@ function ItemTitle({ item }: { item: Item }) {
       >
         <Image src={imageSrc} alt="completeIc" width={30} height={30} />
       </button>
-      <p className="underline">{item.name}</p>
+      <textarea
+        className="underline resize-none h-[30px] items-center flex justify-center text-[20px]"
+        value={(title !== null ? title : item?.name) ?? ""}
+        onChange={(e) => onTitleChange(e.target.value)}
+      />
     </div>
   );
 }

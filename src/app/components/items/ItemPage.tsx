@@ -29,6 +29,7 @@ function ItemPage({ itemId }: { itemId: number }) {
   }); // todo 관리
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [newMemo, setNewMemo] = useState<string | null>(null);
+  const [newName, setNewName] = useState<string | null>(null);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -36,7 +37,11 @@ function ItemPage({ itemId }: { itemId: number }) {
   if (isError) return <div>에러 발생</div>;
 
   const handleItemUpdate = async () => {
-    const body: { memo?: string | null; imageUrl?: string } = {};
+    const body: { name?: string | null; memo?: string | null; imageUrl?: string } = {};
+
+    if (newName !== undefined && newName !== null) {
+      body.name = newName;
+    }
 
     if (newMemo !== undefined && newMemo !== null) {
       body.memo = newMemo;
@@ -58,7 +63,7 @@ function ItemPage({ itemId }: { itemId: number }) {
     );
 
     if (res.ok) {
-      queryClient.invalidateQueries({ queryKey: ["todo"] });
+      queryClient.invalidateQueries({ queryKey: ["todo", itemId] });
       setNewMemo("");
       router.push("/");
     }
@@ -77,7 +82,7 @@ function ItemPage({ itemId }: { itemId: number }) {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <ItemTitle item={data} />
+      <ItemTitle item={data} title={newName} onTitleChange={setNewName}/>
       <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-between gap-4 lg:gap-12">
         <ItemImage
           item={data}
