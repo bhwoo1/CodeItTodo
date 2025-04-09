@@ -39,6 +39,7 @@ function AddBar({ todos }:{todos:Item[]}) {
       <input
         type="text"
         placeholder="할 일을 입력해주세요"
+        value={todo || ""}
         className="w-9/12 h-12 px-4 bg-slate-300 border-2 border-slate-800 rounded-full outline-none shadow-[4px_4px_#0F172A]"
         onChange={(e) => setTodo(e.target.value)}
       />
