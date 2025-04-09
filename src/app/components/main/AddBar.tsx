@@ -3,8 +3,9 @@
 import { Item } from "@/app/Type";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { FormEvent, useState } from "react";
+import Swal from "sweetalert2";
 
-function AddBar({ todos }:{todos:Item[]}) {
+function AddBar({ todos }: { todos: Item[] }) {
   const [todo, setTodo] = useState("");
   const queryClient = useQueryClient();
 
@@ -12,21 +13,28 @@ function AddBar({ todos }:{todos:Item[]}) {
   const handleTodoAdd = async (e: FormEvent) => {
     e.preventDefault();
     if (todo === "") {
+      Swal.fire({
+        title: "Error!",
+        text: "할 일을 입력해주세요!",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
     const tenantId = "bhwoo";
     const res = await fetch(
-      `https://assignment-todolist-api.vercel.app/api/${tenantId}/items`, {
+      `https://assignment-todolist-api.vercel.app/api/${tenantId}/items`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "name" : todo
+          name: todo,
         }),
       }
     ); // api 요청
-
 
     if (res.ok) {
       queryClient.invalidateQueries({ queryKey: ["todos"] }); // todos 목록 갱신
@@ -43,10 +51,29 @@ function AddBar({ todos }:{todos:Item[]}) {
         className="w-9/12 h-12 px-4 bg-slate-300 border-2 border-slate-800 rounded-full outline-none shadow-[4px_4px_#0F172A]"
         onChange={(e) => setTodo(e.target.value)}
       />
-      <button className="w-1/6 md:w-1/4 h-12 cursor-pointer" onClick={handleTodoAdd}>
-        <div className={`shadow-[4px_4px_#0F172A] rounded-full border-2 w-full ${todos?.length === 0 ? 'bg-violet-600' : 'bg-slate-200'}  h-12 flex text-center items-center justify-center`}>
-          <span className={`block sm:hidden text-2xl font-bold ${todos?.length === 0 ? 'text-white' : 'text-black'}`}>+</span>
-          <span className={`hidden sm:block ${todos?.length === 0 ? 'text-white' : 'text-black'}`}>+ 추가하기</span>
+      <button
+        className="w-1/6 md:w-1/4 h-12 cursor-pointer"
+        onClick={handleTodoAdd}
+      >
+        <div
+          className={`shadow-[4px_4px_#0F172A] rounded-full border-2 w-full ${
+            todos?.length === 0 ? "bg-violet-600" : "bg-slate-200"
+          }  h-12 flex text-center items-center justify-center`}
+        >
+          <span
+            className={`block sm:hidden text-2xl font-bold ${
+              todos?.length === 0 ? "text-white" : "text-black"
+            }`}
+          >
+            +
+          </span>
+          <span
+            className={`hidden sm:block ${
+              todos?.length === 0 ? "text-white" : "text-black"
+            }`}
+          >
+            + 추가하기
+          </span>
         </div>
       </button>
     </form>
