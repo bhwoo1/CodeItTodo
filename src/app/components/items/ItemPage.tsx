@@ -7,6 +7,7 @@ import ItemImage from "./ItemImage";
 import ItemMemo from "./ItemMemo";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
+import Loading from "../Loading";
 
 const tenantId = "bhwoo";
 const fetchTodo = async (itemId: number) => {
@@ -31,7 +32,7 @@ function ItemPage({ itemId }: { itemId: number }) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isLoading) return <Loading />;
   if (isError) return <div>에러 발생</div>;
 
   const handleItemUpdate = async () => {
