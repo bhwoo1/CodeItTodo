@@ -20,13 +20,13 @@ const fetchTodo = async (itemId: number) => {
 
   const data = await res.json();
   return data;
-};
+}; // api 요청
 
 function ItemPage({ itemId }: { itemId: number }) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["todo", itemId],
     queryFn: () => fetchTodo(itemId),
-  });
+  }); // todo 관리
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [newMemo, setNewMemo] = useState<string | null>(null);
   const router = useRouter();
@@ -62,7 +62,7 @@ function ItemPage({ itemId }: { itemId: number }) {
       setNewMemo("");
       router.push("/");
     }
-  };
+  }; // api 요청(TODO 수정)
 
   const handleItemDelete = async () => {
     const res = await fetch(
@@ -73,7 +73,7 @@ function ItemPage({ itemId }: { itemId: number }) {
     );
 
     if (res.ok) router.push("/");
-  };
+  }; // api 요청(TODO 삭제)
 
   return (
     <div className="w-full flex flex-col gap-4">

@@ -11,6 +11,7 @@ function TodoBlock({ item }: { item: Item }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  // isCompleted에 따른 버튼 디자인 변경
   useEffect(() => {
     if (item.isCompleted) {
       setImageSrc("/ic/Property 1=Frame 2610233.png");
@@ -19,12 +20,14 @@ function TodoBlock({ item }: { item: Item }) {
     }
   }, [item.isCompleted]);
 
+  // item 상세 페이지 이동
   const handleRedirect = () => {
     router.push(`/items/${item.id}`);
   }
 
+  // TODO 완료/비완료 전환
   const handleComplete = async (e: React.MouseEvent) => {
-    e.stopPropagation();
+    e.stopPropagation(); // 부모의 이벤트 요소(상세 페이지 이동) 상속 X
     const tenantId = "bhwoo";
 
     const res = await fetch(
@@ -38,10 +41,10 @@ function TodoBlock({ item }: { item: Item }) {
           isCompleted: !item.isCompleted,
         }),
       }
-    );
+    ); // api 요청
 
     if (res.ok) {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] }); // todos 목록 갱신
     }
   };
 

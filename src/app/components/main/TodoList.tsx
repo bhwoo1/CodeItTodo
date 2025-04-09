@@ -6,26 +6,6 @@ import React from "react";
 import TodoBlock from "./TodoBlock";
 import Loading from "../Loading";
 
-// const fetchTodos = async () => {
-//   const tenantId = "bhwoo";
-//   const res = await fetch(
-//     `https://assignment-todolist-api.vercel.app/api/${tenantId}/items`,
-//     {
-//       method: "GET",
-//     }
-//   );
-
-//   const data = await res.json();
-//   return data;
-// };
-
-// const useTodoDatas = () => {
-//   return useQuery({
-//     queryKey: ["todos"],
-//     queryFn: fetchTodos,
-//   });
-// };
-
 function TodoList({todos, isLoading, isError}: {todos: Item[], isLoading: boolean, isError: boolean}) {
 
   if (isLoading) return <Loading />;

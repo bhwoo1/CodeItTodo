@@ -9,6 +9,7 @@ function ItemTitle({ item }: { item: Item }) {
   const [imageSrc, setImageSrc] = useState("/ic/Property 1=Default.png");
   const queryClient = useQueryClient();
 
+  // isCompleted에 따른 버튼 디자인 변경
   useEffect(() => {
     if (item.isCompleted) {
       setImageSrc("/ic/Property 1=Frame 2610233.png");
@@ -17,10 +18,9 @@ function ItemTitle({ item }: { item: Item }) {
     }
   }, [item.isCompleted]);
 
-  const handleComplete = async (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // TODO 완료/비완료 전환
+  const handleComplete = async () => {
     const tenantId = "bhwoo";
-
 
     const res = await fetch(
       `https://assignment-todolist-api.vercel.app/api/${tenantId}/items/${item.id}`,
@@ -33,10 +33,10 @@ function ItemTitle({ item }: { item: Item }) {
           isCompleted: !item.isCompleted,
         }),
       }
-    );
+    ); // api 요청
 
     if (res.ok) {
-      queryClient.invalidateQueries({ queryKey: ["todo", item.id] });
+      queryClient.invalidateQueries({ queryKey: ["todo", item.id] }); // todo 갱신
     }
   };
 

@@ -8,6 +8,7 @@ function AddBar({ todos }:{todos:Item[]}) {
   const [todo, setTodo] = useState("");
   const queryClient = useQueryClient();
 
+  // TODO 추가
   const handleTodoAdd = async (e: FormEvent) => {
     e.preventDefault();
     if (todo === "") {
@@ -24,11 +25,11 @@ function AddBar({ todos }:{todos:Item[]}) {
           "name" : todo
         }),
       }
-    );
+    ); // api 요청
 
 
     if (res.ok) {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] }); // todos 목록 갱신
       setTodo("");
     }
   };

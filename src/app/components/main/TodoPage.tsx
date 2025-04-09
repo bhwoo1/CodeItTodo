@@ -16,14 +16,14 @@ const fetchTodos = async () => {
   
     const data = await res.json();
     return data;
-  };
+  }; // api 요청
   
   const useTodoDatas = () => {
     return useQuery({
       queryKey: ["todos"],
       queryFn: fetchTodos,
     });
-  };
+  }; // todos 목록 관리
 
 function TodoPage() {
     const { data, isLoading, isError } = useTodoDatas();

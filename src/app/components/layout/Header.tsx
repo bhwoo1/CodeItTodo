@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 function Header() {
   const [imageSrc, setImageSrc] = useState("/Size=Large.png");
 
+  // 화면 크기에 따른 로고 변경
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;

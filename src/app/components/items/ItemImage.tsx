@@ -11,9 +11,9 @@ function ItemImage({ item, imageSrc, onImageChange }: { item: Item, imageSrc: st
 
     if (file) {
         const imageUrl = URL.createObjectURL(file);
-        onImageChange(imageUrl);
+        onImageChange(imageUrl); // 업로드한 이미지 URL로 변경
     }
-  };
+  }; // 이미지 업로드
 
   return (
     <div className="w-11/12 h-[300px] lg:w-1/3 lg:h-[400px]">
