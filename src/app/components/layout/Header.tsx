@@ -30,7 +30,7 @@ function Header() {
 
   return (
     <header className="h-[80px] flex items-center border-b-1 border-slate-400">
-      <div className="relative w-[100px] h-[50px] lg:h-[80px] mx-12 lg:mx-96">
+      <div className="relative w-[100px] h-[50px] lg:h-[80px] mx-12 lg:mx-48 2xl:mx-80">
         <Link href={"/"}>
           <Image src={imageSrc} alt="logo" fill className="object-contain" />
         </Link>

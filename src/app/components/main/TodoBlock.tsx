@@ -50,7 +50,7 @@ function TodoBlock({ item }: { item: Item }) {
       onClick={handleRedirect}
       className={`flex flex-row ${
         item.isCompleted ? "bg-violet-100" : "bg-slate-100"
-      } border-2 rounded-full h-[50px] items-center p-4 gap-12 cursor-pointer`}
+      } border-2 rounded-full w-full h-[50px] items-center p-4 gap-12 cursor-pointer`}
     >
       <button
         className="cursor-pointer hover:scale-110 transition duration-100"

@@ -75,9 +75,9 @@ function ItemPage({ itemId }: { itemId: number }) {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       <ItemTitle item={data} />
-      <div className="flex flex-col lg:flex-row gap-1 lg:gap-14">
+      <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-between gap-12">
         <ItemImage
           item={data}
           imageSrc={uploadImage}

@@ -37,13 +37,13 @@ function TodoList() {
 
 
   return (
-    <div className="lg:mx-96 mx-12 flex flex-col gap-12 lg:flex-row lg:gap-24">
-      <div className="flex flex-col min-w-1/2">
+    <div className="w-full justify-center flex flex-col lg:flex-row lg:justify-between mx-24 gap-24">
+      <div className="flex flex-col mx-16 lg:mx-0 lg:w-1/2">
         <Image src={"/img/todo.png"} alt="todo" width={100} height={100} />
         <div>
           {incompletedItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-4">
-              <div className="p-12 md:p-24">
+              <div className="p-12">
                 <Image
                   src={"/img/todo_large.png"}
                   alt="completed"
@@ -65,12 +65,12 @@ function TodoList() {
           )}
         </div>
       </div>
-      <div className="flex flex-col min-w-1/2">
+      <div className="flex flex-col mx-16 lg:mx-0 lg:w-1/2">
         <Image src={"/img/done.png"} alt="todo" width={100} height={100} />
         <div>
           {completedItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center text-center text-slate-400 gap-4">
-              <div className="p-12 md:p-24">
+              <div className="p-12">
                 <Image
                   src={"/img/done_large.png"}
                   alt="completed"
