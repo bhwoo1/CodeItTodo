@@ -16,7 +16,7 @@ function ItemImage({ item, imageSrc, onImageChange }: { item: Item, imageSrc: st
   };
 
   return (
-    <div className="w-full h-[300px] lg:w-1/3 lg:h-[400px]">
+    <div className="w-11/12 h-[300px] lg:w-1/3 lg:h-[400px]">
       <div className="h-full lg:mx-0 bg-slate-100 rounded-4xl border-dashed border-4 border-slate-300  flex justify-center items-center relative">
         {item.imageUrl || imageSrc ? (
           <>

@@ -44,7 +44,7 @@ function ItemTitle({ item }: { item: Item }) {
     <div
       className={`${
         item.isCompleted ? "bg-violet-100" : "bg-slate-100"
-      } mx-4 lg:mx-0 w-11/12 h-[50px] border-2 rounded-xl flex items-center px-24 gap-12 text-center justify-center`}
+      } mx-4 lg:mx-0 w-11/12 lg:w-full h-[50px] border-2 rounded-xl flex items-center px-24 gap-12 text-center justify-center`}
     >
       <button
         className="cursor-pointer hover:scale-110 transition duration-100"
