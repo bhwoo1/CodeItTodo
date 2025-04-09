@@ -24,9 +24,9 @@ function ItemImage({
     const englishNameRegex = /^[A-Za-z0-9_.-]+$/;
     if (!englishNameRegex.test(fileName)) {
       Swal.fire({
-        title: "Error!",
+        title: "Warning!",
         text: '파일 이름은 영어, 숫자, "-", "_", "."만 사용할 수 있습니다.',
-        icon: "error",
+        icon: "warning",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -38,9 +38,9 @@ function ItemImage({
     const fileSize = file.size;
     if (fileSize > maxSize) {
       Swal.fire({
-        title: "Error!",
+        title: "Warning!",
         text: "5MB 이하의 이미지를 업로드해주세요!",
-        icon: "error",
+        icon: "warning",
         showConfirmButton: false,
         timer: 1000,
       });
